@@ -1,8 +1,10 @@
 package com.company;
 
+import java.util.Random;
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws java.io.IOException {
         int num;
         num = 100;
         System.out.println("Это переменная num: " + num);
@@ -351,5 +353,170 @@ public class Main {
         // ratio присваивается значение 0, т.к. denom == 0 - истина.
 
         // Круглые скобки повышают предшествование заключенных в них операций. Например (a >> b) + 3 сначало выполниться сдвиг вправо, а потом уже прибавиться 3. Без скобок было бы наоборот
+
+        // 4TH CHAPTER PASSED
+
+        // 5TH CHAPTER START
+        int bytesAvailable;
+        bytesAvailable = 123;
+        // вот так выглядят условные операторы в Java с фигурными скобками
+        if (bytesAvailable > 0) {
+            System.out.println("bytesAvailable more than 0");
+        } else if (bytesAvailable == 0) {
+            System.out.println("bytesAvailable equal 0");
+        } else {
+            System.out.println("bytesAvailable less than 0");
+            System.out.println("Тут есть ошибка");
+        }
+
+
+        System.out.println("Оператор switch(Nintendo)");
+        for (i = 0; i < 6; i++) {
+            switch (i) {
+                case 0: // если оператор, выбранный в switch равен значению в case, в данном случае, если i == 0, выполняется тело кейса
+                    System.out.println("i equal 0");
+                    break;
+                case 1:
+                    System.out.println("i equal 1");
+                    break;
+                case 2:
+                    System.out.println("i equal 2");
+                    break;
+                case 3:
+                    System.out.println("i equal 3");
+                    break;
+                default: // Выполняется, если не один из кейсов не выполнен. Но default писать не обязательно. Его может и не быть. Тогда switch просто ничего не сделает, если нет совпадений с case
+                    System.out.println("i more that 3");
+            }
+        }
+        for (i = 0; i < 10; i++) {
+            switch (i) {
+                case 0: // можно опускать break. Тогда выполнение просто продолжится, и не будет выхода из switch
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                    System.out.println("i меньше 5");
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                    System.out.println("i меньше 10");
+                default:
+                    System.out.println("равно или больше 10");
+            }
+        }
+        // Оператор switch может быть и вложенным. И важно. switch ДЕЙСТВУЕТ БЫСТРЕЕ if
+        for (i = 0; i < 10; i++) {
+            switch (i) {
+                case 0:
+                case 1:
+                    System.out.println("Да");
+                    switch (i) {
+                        case 0:
+                            System.out.println("Нет");
+                    }
+                default:
+                    System.out.println("равно или больше 10");
+            }
+        }
+
+
+        System.out.println("Циклы");
+        int n = 10;
+        while (n > 0) {
+            System.out.println("такт " + n);
+            n--;
+        }
+        int i6 = 100, j6 = 200;
+        while (++i6 < --j6) ; // у этого цикла отсутствует тело
+        System.out.println("Среднее значение равно " + i6);
+
+        System.out.println("Пример цикла do-while");
+        n = 10;
+        do { // Тело цикла будет выполнено минимум 1 раз в любом случае. Даже если условие цикла не выполняется ни разу.
+            System.out.println("такт " + n);
+        } while (--n > 0); // так короче. Не нужно минусовать n в теле цикла
+
+        char choice;
+        do {
+            System.out.println("Справка по оператору:");
+            System.out.println(" 1. if");
+            System.out.println(" 2. switch");
+            System.out.println(" 3. while");
+            System.out.println(" 4. do-while");
+            System.out.println(" 5. for\n");
+            choice = (char) System.in.read(); // Ввод данных. Для них обязательно вверху нужен throws java.io.IOException
+        } while (choice < '1' || choice > '5');
+        System.out.println(choice);
+
+
+        System.out.println("Циклы. For");
+        for (int a = 1, j2 = 4; a < j2; a++, j2--) { // Допускается использовать несколько переменных в инициализирующей части цикла
+            System.out.println("a = " + a);
+            System.out.println("j2 = " + j2);
+        }
+        i = 1;
+        boolean for_bool = false;
+        for (; !for_bool; ) {
+            System.out.println("i = " + i);
+            if (++i == 10) for_bool = true;
+        }
+        // могут быть также и бесконечные циклы. for( ; ; ) {}
+
+        System.out.println("Циклы. For each");
+        int[] nums4 = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        int sum = 0;
+        for (int nu : nums4) {
+            sum += nu; // Здесь в переменную nu с каждой итерацией записывается следующие значение переменной nums4. Аналогично циклу for i in array: в Python
+            System.out.println("Значение nu равно " + nu);
+            if (nu == 5) break; // Если nu присвоилось значение 5, прерываем цикл
+            nu = 40; // Это не окажет никакого воздействия на переменную в цикле. Значение переменной в цикле не изменится
+        }
+        System.out.println("Сумма равна " + sum);
+        int nums5[][] = new int[3][5];
+        for (i = 0; i < 3; i++)
+            for (j = 0; j < 5; j++)
+                nums5[i][j] = (i + 1) * (j + 1);
+        sum = 0;
+        for (int nus[] : nums5) { // Тип переменной nus должен совпадать с типом переменных в массиве nums5. А т.к. это - многомерный массив, то nus должен быть массивом.
+            for (int nusx : nus) {
+                System.out.println("Значение равно: " + nusx);
+                sum += nusx;
+            }
+            System.out.println("Сумма: " + sum);
+        }
+
+        System.out.println("Оператор break с меткой");
+        outer:
+        for (i = 0; i < 3; i++) {
+            System.out.print("Проход " + i + ": ");
+            for (j = 0; j < 100; j++) {
+                if (j == 10) break outer; // выход из обоих циклов, т.к. outer - это метка на внешний цикл.
+                System.out.print(j + " ");
+            }
+            System.out.println("Эта строка не будет выводиться");
+        }
+        System.out.println("Циклы завершены"); // ВАЖНО! Нельзя выполнить переход к метке с помощью break, если блок с этой меткой не содержит этот break
+
+        for (i = 0; i < 10; i++) {
+            System.out.print(i + " ");
+            if (i % 2 == 0) continue; // оператор continue аналогичен этому же оператору в Python
+            System.out.println();
+        }
+
+        outer:
+        for (i = 0; i < 10; i++) {
+            for (j = 0; j < 10; j++) {
+                if (j > i) {
+                    System.out.println();
+                    continue outer; // Оператор continue с меткой работает также, как и break. Только continue просто продолжает итерацию внешнего цикла, а не прикращает ее
+                }
+                System.out.print(" " + (i * j));
+            }
+        }
+        // оператор return аналогичен этому же оператору в Python. Он служит для выполнения фвного выхода из метода
+        
     }
 }
