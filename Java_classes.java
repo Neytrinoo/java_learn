@@ -34,8 +34,8 @@ public class Java_classes {
         System.out.println("Класс Stack");
         Stack mystack1 = new Stack();
         Stack mystack2 = new Stack();
-        for (int i=0; i < 10; i++) mystack1.push(i);
-        for (int i=10; i < 20; i++) mystack2.push(i);
+        for (int i = 0; i < 10; i++) mystack1.push(i);
+        for (int i = 10; i < 20; i++) mystack2.push(i);
         System.out.println("Содержимое стека mystack1:");
         for (int i = 0; i < 10; i++)
             System.out.println(mystack1.pop());
@@ -43,6 +43,21 @@ public class Java_classes {
         System.out.println("Содержимое стека mystack2:");
         for (int i = 0; i < 10; i++)
             System.out.println(mystack2.pop());
+
+
+        System.out.println("Перегрузка методов");
+        Overload ob = new Overload();
+        double result;
+        ob.test();
+        ob.test(10);
+        ob.test(10, 20);
+        result = ob.test(123.25);
+        System.out.println("Результат вызовва ob.test(123.55) " + result);
+
+        System.out.println("Перегрузка конструктора");
+        mybox = new Box();
+        mybox3 = new Box(10, 20, 15);
+        mybox4 = new Box(7); // вызовется конструктор для double, т.к. для одного int типа у нас конструктора нет, а Java может преобразовать int в double.
     }
 
 
@@ -57,6 +72,16 @@ class Box {
         this.width = w; // Здесь можно пользоваться ключевым словом this(аналог self в Python), но это избыточно.
         height = h;
         depth = d;
+    }
+
+    Box() { // Перегружаем конструктор. Вызовется, если при объявлении нового объекта в конструктор не передадут параметры
+        width = -1;
+        height = -1;
+        depth = -1;
+    }
+
+    Box(double len) {
+        width = height = depth = len;
     }
 
     void volume() {
@@ -97,5 +122,25 @@ class Stack { // реализация стека. Пример стека: ст�
         } else {
             return stck[tos--];
         }
+    }
+}
+
+class Overload {
+    // Перегрузка методов. Один и тот же метод в классе можно писать несколько раз. При этом должны отличаться количество передаваемых параметров и/или их тип.
+    void test() {
+        System.out.println("Параметров нема");
+    }
+
+    void test(int a) {
+        System.out.println("a: " + a);
+    }
+
+    void test(int a, int b) {
+        System.out.println("a and b: " + a + " " + b);
+    }
+
+    double test(double a) {
+        System.out.println("double a: " + a);
+        return a * a;
     }
 }
